@@ -1,5 +1,5 @@
 //
-// Checks accounts with a Conversion Rate < 0.02
+// Checks accounts with a Conversion Rate < 0.027
 //
 
 function checkCRPerformance() {
@@ -8,8 +8,8 @@ function checkCRPerformance() {
 	/// select accounts which fullfill your criteria(conditions)
    var accountIterator = MccApp.accounts()
   .withCondition("LabelNames CONTAINS 'check_performance'")
-  .withCondition("ConversionRate < 0.1")
-  .withCondition("Conversions >= 4")
+  .withCondition("ConversionRate < 0.027")
+  .withCondition("Conversions >= 2")
   .forDateRange("LAST_7_DAYS")
   .get();
   
