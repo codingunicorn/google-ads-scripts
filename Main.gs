@@ -1,16 +1,14 @@
 function main() {
 
-      ///
-      // INDIVIDUAL PERFORMANCE CHECKERS
-      ///
-
       checkCpcPerformance();
       checkCtrPerformance();
       checkCRPerformance();
       noConversions();
+      checkBadPerformance();
+
+
 
       //TODO's: 
       //checkQfPerformance();
 
-      //TODO: add others as well
 }
