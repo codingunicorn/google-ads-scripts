@@ -1,5 +1,5 @@
 //
-// Checks accounts with a CTR < 3%
+// Checks accounts with a CTR < 5%
 //
 
 function checkCtrPerformance() {
@@ -8,7 +8,7 @@ function checkCtrPerformance() {
 	/// select accounts which fullfill your criteria(conditions)
    var accountIterator = MccApp.accounts()
   .withCondition("LabelNames CONTAINS 'check_performance'")
-  .withCondition('Ctr < 0.03')
+  .withCondition('Ctr < 0.05')
   .forDateRange("LAST_7_DAYS")
   .get();
   
@@ -41,7 +41,7 @@ function checkCtrPerformance() {
     /*
     MailApp.sendEmail({
     to: asanaBoardMail, 
-    subject: 'CTR verbessern, liegt tiefer als 3%', 
+    subject: 'CTR verbessern, liegt tiefer als 5%', 
     body: 'Der CTR dieses Accounts ist ungenügend. Schau dir folgende Zahlen an und versuche den CTR zu steigern: ' + CtrMail
   	});
     */
