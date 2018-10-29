@@ -1,22 +1,22 @@
-///
-// Checks accounts with CPC > 1.01
-///
+//
+// checks Accounts with no Conversions last week  
+//
 
-function checkCpcPerformance() { 
+	function noConversions() {
   
-
+  
 	/// select accounts which fullfill your criteria(conditions)
    var accountIterator = MccApp.accounts()
   .withCondition("LabelNames CONTAINS 'check_performance'")
-  .withCondition('AverageCpc > 1.01')
-  .forDateRange("LAST_MONTH")
+  .withCondition("Conversions < 1")
+  .forDateRange("LAST_7_DAYS")
   .get();
   
   
 	// iterate over selected accounts
   while(accountIterator.hasNext()){
     var account = accountIterator.next();
-    var stats = account.getStatsFor('LAST_MONTH');
+    var stats = account.getStatsFor('LAST_7_DAYS');
     var accountName = account.getName();
     
 	//create a labelIterator with ONLY asanaBoard E-Mails in it
@@ -29,9 +29,9 @@ function checkCpcPerformance() {
       var asanaBoardMail = accountLabel.getName();
    
  	//create E-Mail Text
-   	var CpcMail = "\n  Account: " + accountName
-    			+ "\n  Klicks: " + stats.getClicks().toFixed(0) 
-    			+ "\n  Average CPC: " + stats.getAverageCpc() + " CHF"
+   	var NCMail = "\n  Account: " + accountName
+    			+ "\n  Conversions: " + stats.getConversions() 
+        		+ "\n  Klicks: " + stats.getClicks() 
     			+ "\n  Label: " + asanaBoardMail;
     
       
@@ -41,8 +41,8 @@ function checkCpcPerformance() {
     /*
     MailApp.sendEmail({
     to: asanaBoardMail, 
-    subject: 'CPC verbessern, ist höher als 1.01 CHF', 
-    body: 'Der CPC dieses Accounts ist eher schlecht. Schau dir folgende Zahlen an und versuche den CPC zu senken: ' + CpcMail
+    subject: 'Achtung, keine Conversions über Google Ads letzte Woche', 
+    body: 'Dieser Account konnte letzte Woche keine Conversion in Google Ads verzeichnen. Bitte überprüfe das. Hier die Daten von Google Ads: ' + NCMail
   	});
     */
     
@@ -50,10 +50,10 @@ function checkCpcPerformance() {
   /* 
   *   Logger checks - Use these to test when in Preview Mode
  */	  
-      Logger.log(CpcMail);
+      Logger.log(NCMail);
       Logger.log("The Account is " + accountName);
       Logger.log("E-Mail was sent to " + asanaBoardMail);
        
       }
     }
-  } 
+  }
